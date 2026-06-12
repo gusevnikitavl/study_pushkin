@@ -1,0 +1,202 @@
+/* ===================================================
+   DESIGN SYSTEM: Русский академизм с цифровым акцентом
+   Цвета: тёмно-синий (#1a2744) + золотой (#c9a84c) + кремовый (#f5f0e8)
+   Шрифты: Playfair Display (заголовки) + PT Sans (тело)
+   Философия: благородная сдержанность, асимметричная сетка, свет свечи
+   =================================================== */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'PT Sans', system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  /* Академическая палитра */
+  --navy: #1a2744;
+  --navy-light: #243358;
+  --gold: #c9a84c;
+  --gold-light: #e2c46a;
+  --gold-pale: #f0e0b0;
+  --cream: #f5f0e8;
+  --cream-dark: #ede5d8;
+  --ink: #1c1a16;
+  --ink-soft: #3d3628;
+
+  --background: oklch(0.97 0.008 75);
+  --foreground: oklch(0.15 0.02 65);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 65);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 65);
+  --primary: oklch(0.28 0.08 255);
+  --primary-foreground: oklch(0.97 0.015 80);
+  --secondary: oklch(0.93 0.015 75);
+  --secondary-foreground: oklch(0.25 0.03 65);
+  --muted: oklch(0.94 0.01 75);
+  --muted-foreground: oklch(0.5 0.02 65);
+  --accent: oklch(0.72 0.12 75);
+  --accent-foreground: oklch(0.15 0.02 65);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.015 75);
+  --input: oklch(0.88 0.015 75);
+  --ring: oklch(0.28 0.08 255);
+  --sidebar: oklch(0.97 0.008 75);
+  --sidebar-foreground: oklch(0.15 0.02 65);
+  --sidebar-primary: oklch(0.28 0.08 255);
+  --sidebar-primary-foreground: oklch(0.97 0.015 80);
+  --sidebar-accent: oklch(0.93 0.015 75);
+  --sidebar-accent-foreground: oklch(0.15 0.02 65);
+  --sidebar-border: oklch(0.88 0.015 75);
+  --sidebar-ring: oklch(0.28 0.08 255);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    line-height: 1.75;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.25;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Золотая линия-разделитель */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.6;
+  }
+
+  /* Декоративная кавычка */
+  .decorative-quote {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--gold);
+    opacity: 0.3;
+    font-style: italic;
+  }
+
+  /* Карточка занятия */
+  .lesson-card {
+    transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26, 39, 68, 0.15);
+  }
+
+  /* Кнопка с золотым акцентом */
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: all 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  }
+  .btn-gold:active {
+    transform: scale(0.97);
+  }
+
+  /* Анимация появления */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 400ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  /* Чат-ассистент */
+  .chat-bubble-user {
+    background: var(--navy);
+    color: white;
+    border-radius: 18px 18px 4px 18px;
+  }
+  .chat-bubble-ai {
+    background: var(--cream-dark);
+    color: var(--ink);
+    border-radius: 18px 18px 18px 4px;
+    border-left: 3px solid var(--gold);
+  }
+}
