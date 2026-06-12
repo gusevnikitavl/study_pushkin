@@ -33,7 +33,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/public  # ← ВАЖНО: у тебя файлы здесь!
+          path: ./dist  # ← ВАЖНО: у тебя файлы здесь!
 
   deploy:
     environment:
